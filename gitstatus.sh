@@ -32,9 +32,11 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
   status=${line:0:2}
   case "$status" in
     \#\#) branch_line="${line/\.\.\./^}" ;;
+    MM) ((num_changed++)) ; ((num_staged++)) ;;
     ?M) ((num_changed++)) ;;
     U?) ((num_conflicts++)) ;;
     \?\?) ((num_untracked++)) ;;
+    ?D) ((num_changed++)) ;;
     *) ((num_staged++)) ;;
   esac
 done <<< "$gitstatus"
