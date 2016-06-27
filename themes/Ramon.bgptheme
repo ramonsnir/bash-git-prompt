@@ -98,6 +98,10 @@ function prompt_callback {
     echo -n " (ruby $(ruby -v | head -c10 | tail -c5))"
   fi
 
+  if (which node >/dev/null 2>&1); then
+    echo -n " (node $(node -v))"
+  fi
+
   if [ $jobsCount -gt 0 ]; then
     echo -n " jobs:($runningJobsCount/\j)"
   fi
